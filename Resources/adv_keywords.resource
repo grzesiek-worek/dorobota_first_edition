@@ -11,5 +11,9 @@ Adv Sample Keyword with one default arguments
     [Arguments]    ${arg1}    ${arg2}=default2
     Log    This is the first keyword with default arguments: ${arg1}, ${arg2}.
 
+Simple Keyword For Dupication Check
+    [Documentation]    This is a simple check keyword.
+    Log    This is a simple check keyword.
+
 *** Comments ***
 # This is a comment in the resource file.

@@ -18,6 +18,7 @@ ${typu_str2}    asd
 @{typu_list}    ASDDASDAS    asd    123456
 &{typu_dict}    key1=value1    key2=value2    key3=value3
 ${typu_int}    123456
+${CHECK_VAR_SCOPE}    This is a variable in the test suite VARIABLES section.
 
 
 *** Test Cases ***
@@ -33,6 +34,17 @@ Example Test Case - Simple Log
     # Log     @{typu_list}
     # To nie zadziała ponieważ rozpakujemy dictionary jako key1=value1, key2=value2, key3=value3, a keyword "Log" nie przyjmuje parametrów typu key1 etc... tylko message, level, etc...
     # Log     &{typu_dict}
+
+Example Test Case - CHECK_VAR_SCOPE
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    Log    ${CHECK_VAR_SCOPE}
+    Keyword For CHECK_VAR_SCOPE - Suite level
+    Keyword For CHECK_VAR_SCOPE - Resource level
+    Keyword For CHECK_VAR_SCOPE - Resource level - Overwrite
+    Keyword For CHECK_VAR_SCOPE - Resource level - Overwrite with Arguments    arg1_value
+    Keyword For CHECK_VAR_SCOPE - Resource level - Overwrite with Arguments with Default Value
+    Keyword For CHECK_VAR_SCOPE - Resource level - Overwrite By Set
 
 Example Test Case - First Keyword
     [Documentation]    This is the first test case.
@@ -151,10 +163,39 @@ Example Test Cases - from Handler Resource file
     [Tags]    smoke
     Adv Sample Keyword with one default arguments    arg1_value
 
+Example Test Cases - Duplication Keywords
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    # Ten keyword sie wywali poniewaz jest w obu resource file, basic_keywords i adv_keywords
+    # Simple Keyword For Dupication Check
+    basic_keywords.Simple Keyword For Dupication Check
+
+Example Test Cases - Keyword with IF
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    Keyword with IF    value1
+    Keyword with IF    value2
+    Keyword with IF    value3
+
+Example Test Cases - Keyword with WHILE
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    Keyword With WHILE    5
+
+Example Test Cases - Keyword with TRY EXCEPT FINALLY
+    [Documentation]    This is the first test case.    
+    [Tags]    smoke
+    Keyword With TRY EXCEPT FINALLY    5
+    Keyword With TRY EXCEPT FINALLY    0
+
 *** Keywords ***
 First Keyword
     [Documentation]    This is the first keyword.
     Log    This is the first keyword.
+
+Keyword For CHECK_VAR_SCOPE - Suite level
+    [Documentation]    This is a keyword to check variable scope.
+    Log    ${CHECK_VAR_SCOPE}
 
 First Keyword with arguments
     [Documentation]    This is the first keyword with arguments.
