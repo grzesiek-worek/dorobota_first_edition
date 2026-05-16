@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation     This is a test suite for Browser library.
+Resource          Resources/basic_keywords.resource
 
 Suite Setup
 Suite Teardown
@@ -107,6 +108,34 @@ Exemple Test Case - Loop with Dictionary
     # Tutaj dict_1 trafi jako jeden argument do pentli, a nie jako słownik, dlatego trzeba rozpakować słownik za pomocą &, w innym przypadku kod sie wywali
     # Keyword Loop with Dynamic Dictionary   user1=data1    user2=data2    user3=data3    ${dict_1}
 
+Example Test Case - Arguments mandatory with List
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    # This is a comment in the test case.
+    Keyword With Mandatory Arguments and List    arg1_value    item1    item2    item3
+    # Pamietac o @ bo keyword tez przyjmuje zmienna typu list
+    Keyword With Mandatory Arguments and List    ${typu_str1}    @{typu_list}
+
+Example Test Case - Arguments mandatory with Dictionary
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    Keyword With Mandatory Arguments and Dictionary    arg1_value    key1=value1    key2=value2    key3=value
+    # Pamietac o & bo keyword tez przyjmuje zmienna typu dictionary
+    Keyword With Mandatory Arguments and Dictionary    ${typu_str1}    &{typu_dict}
+
+Example Test Case - First using keyword from resource file
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    First Keyword with one default arguments via Resource file    arg1_value    
+
+Example Test Case - First using keyword from resource file with RETURN
+    [Documentation]    This is the first test case.
+    [Tags]    smoke
+    ${return_value}    First Keyword with one default arguments via Resource file With RETURN    arg1_value    
+    Log    Return value: ${return_value}
+
+    ${return_value1}    ${return_value2}    First Keyword with one default arguments via Resource file With RETURN    arg1_value    
+    Log    Return value: ${return_value1} ${return_value2}    
 
 *** Keywords ***
 First Keyword
@@ -133,7 +162,6 @@ First Keyword with three arguments and two default arguments
     [Arguments]    ${arg1}    ${arg2}=default2    ${arg3}=default3
     Log    This is the first keyword with default arguments: ${arg1}, ${arg2}, ${arg3}.
 
-
 Keyword Loop with Created List
     [Documentation]    This is a keyword with a loop.
     [Arguments]    ${list}
@@ -158,6 +186,22 @@ Keyword Loop with Created Dictionary
 Keyword Loop with Dynamic Dictionary    
     [Documentation]    This is a keyword with a loop for dictionary for log only keys.
     [Arguments]    &{dict}
+    FOR    ${key}    IN    @{dict.keys()}
+        Log    ${key}
+    END
+
+Keyword With Mandatory Arguments and List
+    [Documentation]    This is a keyword with mandatory arguments and list.
+    [Arguments]    ${arg1}    @{list}
+    Log    This is a keyword with mandatory arguments and list: ${arg1}.
+    FOR    ${item}    IN    @{list}
+        Log    ${item}
+    END
+
+Keyword With Mandatory Arguments and Dictionary
+    [Documentation]    This is a keyword with mandatory arguments and dictionary.
+    [Arguments]    ${arg1}    &{dict}
+    Log    This is a keyword with mandatory arguments and dictionary: ${arg1}.
     FOR    ${key}    IN    @{dict.keys()}
         Log    ${key}
     END
