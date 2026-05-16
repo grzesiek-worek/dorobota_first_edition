@@ -38,6 +38,10 @@ Example Test Case - Simple Log
 Example Test Case - CHECK_VAR_SCOPE
     [Documentation]    This is the first test case.
     [Tags]    smoke
+    # uruchomic ten test case 3 razy z różnmi komendami
+    # python -m robot C:\Users\arturj\dorobota_first_edition\Tests\
+    # python -m robot -V .\SUT\artur.py C:\Users\arturj\dorobota_first_edition\Tests\
+    # python -m robot -v CHECK_VAR_SCOPE:from_console -V .\SUT\artur.py C:\Users\arturj\dorobota_first_edition\Tests\
     Log    ${CHECK_VAR_SCOPE}
     Keyword For CHECK_VAR_SCOPE - Suite level
     Keyword For CHECK_VAR_SCOPE - Resource level
