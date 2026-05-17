@@ -5,6 +5,7 @@ from robot.api.deco import keyword
 # Nazwa klasy MUSI być taka sama jak nazwa pliku!
 class QADemoHelperClass:
 
+    # dekorat keywords z RFW jest potrzebny aby metoda mogła być używana jako keyword w RFW
     @keyword(name="Text Box Verify Output2")
     @staticmethod
     def text_box_verify_output2(actual_output, full_name, email, current_address, permanent_address):

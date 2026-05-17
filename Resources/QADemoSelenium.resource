@@ -94,3 +94,6 @@ Text Box: Verify Output
     # podłaczenie python do RFW za pomocą "płaskiego" pliku python składającego się tylko z funkcji
     Text Box Verify Output    ${actual_output}    ${full_name}    ${email}    ${current_address}    ${permanent_address}
     Text Box Verify Output2    ${actual_output}    ${full_name}    ${email}    ${current_address}    ${permanent_address}
+    Text Box Verify Output With RFW Libs    ${actual_output}    ${full_name}    ${email}    ${current_address}    ${permanent_address}
+
+ 
